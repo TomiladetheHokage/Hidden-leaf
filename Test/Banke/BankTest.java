@@ -16,10 +16,8 @@ class BankTest {
     @Test
     public void testBankCanNotWithdrawFromNonExistingAccount(){
         Bank kuda = new Bank();
-        kuda.addCustomer("1",12,"tomi");
-        kuda.depositTo(11, 2_000);
         kuda.withdrawal(500,"1",11);
-        assertEquals(0, kuda.checkBalanceFor(12, "1"));
+        assertEquals(-1, kuda.checkBalanceFor(12, "1"));
     }
 
     @Test
@@ -58,6 +56,13 @@ class BankTest {
     }
 
     @Test
+    public void testBankCanNotTransferToNonExistingAza(){
+        Bank kuda = new Bank();
+        kuda.transfer(13,11,2_000,"123");
+        assertEquals(-1, kuda.checkBalanceFor(13, "123"));
+    }
+
+    @Test
     public void testBankCanDeposit(){
         Bank kuda = new Bank();
         kuda.addCustomer("123",13,"Tomi");
@@ -70,7 +75,7 @@ class BankTest {
         Bank kuda = new Bank();
         kuda.addCustomer("123",13,"Tomi");
         kuda.depositTo(1, 5_000);
-        assertEquals(0, kuda.checkBalanceFor(1,"123"));
+        assertEquals(-1, kuda.checkBalanceFor(1,"123"));
     }
 
 

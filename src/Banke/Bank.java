@@ -24,7 +24,7 @@ public class Bank {
             print("Amount succcesfully withdrawn");
         }
         else{
-            print("Account not found");
+            print("Account not found. Unable to withdraw");
         }
     }
 
@@ -43,13 +43,15 @@ public class Bank {
         return noOfCustomers;
     }
 
-    public void transfer(int accountNumbertodeposit, int owneraccountNumber, int amount, String pin){
-        Account account = findAccount(owneraccountNumber);
-        if(account != null) {
-            account.withdraw(amount, pin);
-            depositTo(accountNumbertodeposit, amount);
+    public void transfer(int destinationAcc, int owneraccountNumber, int amount, String pin){
+        Account Ownaccount = findAccount(owneraccountNumber);
+        Account destinationAccount = findAccount(destinationAcc);
+        if(Ownaccount != null && destinationAccount != null) {
+            Ownaccount.withdraw(amount, pin);
+            depositTo(destinationAcc, amount);
             print("Amount successfully transfered");
         }
+        else { print("Could not find account to transfer");}
     }
 
     public void depositTo (int accountNumber, int amount){
@@ -58,7 +60,7 @@ public class Bank {
             account.deposit(amount);
             print("Amount succesfully deposited");
         }
-        else { print("Account not found");}
+        else { print("Account not found. Can not deposit");}
     }
 
     public int checkBalanceFor(int accountNumber, String pin){
@@ -70,7 +72,7 @@ public class Bank {
         }
         else {
             print("Account not found");
-            return 0;
+            return -1;
         }
     }
 
