@@ -35,7 +35,6 @@ public class Bank {
     public Account findAccount(int accountNumber) {
         for (Account account : accounts) {
             if (account.getAccountNumber() == accountNumber) return account;
-            else print("Account not found");
         }
         return null;
     }
@@ -46,8 +45,11 @@ public class Bank {
 
     public void transfer(int accountNumbertodeposit, int owneraccountNumber, int amount, String pin){
         Account account = findAccount(owneraccountNumber);
-        account.withdraw(amount, pin);
-        depositTo(accountNumbertodeposit, amount);
+        if(account != null) {
+            account.withdraw(amount, pin);
+            depositTo(accountNumbertodeposit, amount);
+            print("Amount successfully transfered");
+        }
     }
 
     public void depositTo (int accountNumber, int amount){

@@ -48,7 +48,13 @@ class BankTest {
 
     @Test
     public void testBankCanTransfer(){
-        Bank kuda
+        Bank kuda = new Bank();
+        kuda.addCustomer("123",12,"wade");
+        kuda.depositTo(12, 5_000);
+
+        kuda.addCustomer("1234", 11, "sade");
+        kuda.transfer(11,12,2_000,"123");
+        assertEquals(2_000, kuda.checkBalanceFor(11, "123"));
     }
 
     @Test
