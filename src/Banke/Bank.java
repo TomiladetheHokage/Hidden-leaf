@@ -6,7 +6,6 @@ public class Bank {
     private ArrayList<Account> accounts;
     private int noOfCustomers;
 
-    //Account account = new Account("123",12,"ola");
     public Bank(){
         accounts = new ArrayList<>();
         noOfCustomers = 0;
@@ -22,11 +21,11 @@ public class Bank {
         Account account = findAccount(accountNumber);
         if (account != null) {
             account.withdraw(amount, pin);
+            print("Amount succcesfully withdrawn");
         }
-        //else{
-        //    print("Account not found");
-        //}
-
+        else{
+            print("Account not found");
+        }
     }
 
     public void print(String input){
@@ -38,7 +37,6 @@ public class Bank {
             if (account.getAccountNumber() == accountNumber) return account;
             else print("Account not found");
         }
-
         return null;
     }
 
@@ -46,12 +44,32 @@ public class Bank {
         return noOfCustomers;
     }
 
+    public void transfer(int accountNumbertodeposit, int owneraccountNumber, int amount, String pin){
+        Account account = findAccount(owneraccountNumber);
+        account.withdraw(amount, pin);
+        depositTo(accountNumbertodeposit, amount);
+    }
+
     public void depositTo (int accountNumber, int amount){
         Account account = findAccount(accountNumber);
         if (account != null){
             account.deposit(amount);
+            print("Amount succesfully deposited");
         }
+        else { print("Account not found");}
+    }
 
+    public int checkBalanceFor(int accountNumber, String pin){
+        Account account = findAccount(accountNumber);
+        if (account != null) {
+            int balance;
+            balance = account.checkBalance(pin);
+            return balance;
+        }
+        else {
+            print("Account not found");
+            return 0;
+        }
     }
 
 
