@@ -11,7 +11,8 @@ public class Bank {
         noOfCustomers = 0;
     }
 
-    public void addCustomer(String pin, int accountNumber, String accountName) {
+    public void addCustomer(String pin, String accountName) {
+        int accountNumber = generateAccountNumber();
         Account newAccount = new Account(pin, accountNumber, accountName);
         accounts.add(newAccount);
         noOfCustomers ++;
@@ -76,5 +77,8 @@ public class Bank {
         }
     }
 
+    private int generateAccountNumber(){
+        return accounts.size() + 1;
+    }
 
 }

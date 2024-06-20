@@ -9,32 +9,32 @@ class BankTest {
     @Test
     public void testBankCanAddCustomer(){
         Bank kuda = new Bank();
-        kuda.addCustomer("1",12,"yemi");
+        kuda.addCustomer("1","yemi");
         assertEquals(1, kuda.noOfCustomers());
     }
 
     @Test
     public void testBankCanNotWithdrawFromNonExistingAccount(){
         Bank kuda = new Bank();
-        kuda.withdrawal(500,"1",11);
-        assertEquals(-1, kuda.checkBalanceFor(12, "1"));
+        kuda.withdrawal(500,"1",1);
+        assertEquals(-1, kuda.checkBalanceFor(1, "1"));
     }
 
     @Test
     public void testBankCanWithdraw(){
         Bank kuda = new Bank();
-        kuda.addCustomer("1",12,"yemi");
-        kuda.depositTo(12, 5_000);
-        kuda.withdrawal(2_000, "1", 12);
-        assertEquals(3_000, kuda.checkBalanceFor(12, "1"));
+        kuda.addCustomer("1","yemi");
+        kuda.depositTo(1, 5_000);
+        kuda.withdrawal(2_000, "1", 1);
+        assertEquals(3_000, kuda.checkBalanceFor(1, "1"));
     }
 
     @Test
     public void testBankCanFindAccount(){
         Bank kuda = new Bank();
-        kuda.addCustomer("1",12,"tomi");
-        Account foundAccount = kuda.findAccount(12);
-        assertEquals(12, foundAccount.getAccountNumber());
+        kuda.addCustomer("1","tomi");
+        Account foundAccount = kuda.findAccount(1);
+        assertEquals(1, foundAccount.getAccountNumber());
         assertEquals("tomi", foundAccount.getaccountName());
     }
 
@@ -47,36 +47,38 @@ class BankTest {
     @Test
     public void testBankCanTransfer(){
         Bank kuda = new Bank();
-        kuda.addCustomer("123",12,"wade");
-        kuda.depositTo(12, 5_000);
+        kuda.addCustomer("123","wade");
+        kuda.depositTo(1, 5_000);
 
-        kuda.addCustomer("1234", 11, "sade");
-        kuda.transfer(11,12,2_000,"123");
-        assertEquals(2_000, kuda.checkBalanceFor(11, "123"));
+        kuda.addCustomer("1234",  "sade");
+        kuda.transfer(2,1,2_000,"123");
+        assertEquals(3_000, kuda.checkBalanceFor(1, "123"));
     }
 
     @Test
     public void testBankCanNotTransferToNonExistingAza(){
         Bank kuda = new Bank();
-        kuda.transfer(13,11,2_000,"123");
-        assertEquals(-1, kuda.checkBalanceFor(13, "123"));
+        kuda.transfer(1,1,2_000,"123");
+        assertEquals(-1, kuda.checkBalanceFor(1, "123"));
     }
 
     @Test
     public void testBankCanDeposit(){
         Bank kuda = new Bank();
-        kuda.addCustomer("123",13,"Tomi");
-        kuda.depositTo(13,5_000);
-        assertEquals(5_000, kuda.checkBalanceFor(13, "123"));
+        kuda.addCustomer("123","Tomi");
+        kuda.depositTo(1,5_000);
+        assertEquals(5_000, kuda.checkBalanceFor(1, "123"));
     }
 
     @Test
     public void testBankkCanNotDepositToNonExistingAccount(){
         Bank kuda = new Bank();
-        kuda.addCustomer("123",13,"Tomi");
-        kuda.depositTo(1, 5_000);
-        assertEquals(-1, kuda.checkBalanceFor(1,"123"));
+        kuda.addCustomer("123","Tomi");
+        kuda.depositTo(2, 5_000);
+        assertEquals(-1, kuda.checkBalanceFor(2,"123"));
     }
+
+
 
 
 

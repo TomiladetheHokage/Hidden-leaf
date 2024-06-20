@@ -12,6 +12,7 @@ public Account(String pin, int accountNumber, String accountName) {
     this.accountNumber = accountNumber;
     this.accountName = accountName;
 }
+
     public String getaccountName(){
         return accountName;
     }
