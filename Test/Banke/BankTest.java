@@ -53,6 +53,7 @@ class BankTest {
         kuda.addCustomer("1234",  "sade");
         kuda.transfer(2,1,2_000,"123");
         assertEquals(3_000, kuda.checkBalanceFor(1, "123"));
+        assertEquals(2_000, kuda.checkBalanceFor(2, "1234"));
     }
 
     @Test

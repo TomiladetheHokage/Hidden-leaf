@@ -21,6 +21,12 @@ public class AccountTest {
     }
 
     @Test
+    public void testAccountCanNotCheckBalanceWithWrongPin(){
+        Account account = new Account("123",1, "yemi");
+        assertEquals(-1,account.checkBalance("111"));
+    }
+
+    @Test
     public void testAccountCanNotDepositNegativeBalance(){
         Account account = new Account("123",1, "yemi");
         account.deposit(-1_000);
@@ -39,7 +45,7 @@ public class AccountTest {
         Account account = new Account("123",1, "yemi");
         account.deposit(1_000);
         account.withdraw(500, "123");
-        assertEquals(500, account.checkBalance("111"));
+        assertEquals(500, account.checkBalance("123"));
     }
 
     @Test
@@ -47,7 +53,7 @@ public class AccountTest {
         Account account = new Account("123",1, "yemi");
         //account.deposit(1_000);
         account.withdraw(500, "123");
-        assertEquals(0, account.checkBalance("111"));
+        assertEquals(0, account.checkBalance("123"));
     }
 
 };

@@ -55,13 +55,8 @@ public class Bank {
         else { print("Could not find account to transfer");}
     }
 
-    public void depositTo (int accountNumber, int amount){
-        Account account = findAccount(accountNumber);
-        if (account != null){
-            account.deposit(amount);
-            print("Amount succesfully deposited");
-        }
-        else { print("Account not found. Can not deposit");}
+    private int generateAccountNumber(){
+        return accounts.size() + 1;
     }
 
     public int checkBalanceFor(int accountNumber, String pin){
@@ -77,8 +72,15 @@ public class Bank {
         }
     }
 
-    private int generateAccountNumber(){
-        return accounts.size() + 1;
+    public void depositTo (int accountNumber, int amount){
+        Account account = findAccount(accountNumber);
+        if (account != null){
+            account.deposit(amount);
+            print("Amount succesfully deposited");
+        }
+        else { print("Account not found. Can not deposit");}
     }
+
+
 
 }

@@ -28,14 +28,24 @@ public Account(String pin, int accountNumber, String accountName) {
     }
 
     public int checkBalance(String pin){
-    return balance;
+    if (this.pin.equalsIgnoreCase(pin)){
+        return balance;
+    }
+   else{
+       Bank bank = new Bank();
+       bank.print("Wrong Pin");
+       return -1;
+   }
     }
 
 
     public void withdraw(int amount, String pin) {
-    if (balance > amount && amount > 0){
-        balance = balance - amount;
+    if(this.pin.equalsIgnoreCase(pin)){
+        if (balance > amount && amount > 0){
+            balance = balance - amount;
+        }
     }
+
      
     }
 }
