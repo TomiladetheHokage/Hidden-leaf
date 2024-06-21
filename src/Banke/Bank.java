@@ -12,8 +12,14 @@ public class Bank {
     }
 
     public void addCustomer(String pin, String accountName) {
-        int accountNumber = generateAccountNumber();
-        Account newAccount = new Account(pin, accountNumber, accountName);
+        Account newAccount = new Account(pin, generateAccountNumber(), accountName);
+        String aza = String.valueOf(generateAccountNumber());
+        String welcomeMessage = """
+                 Account succesfully created
+                 Thank you  accountName for banking with us %s
+                 Your account number is %d
+                """.formatted(accountName, aza);
+        print(welcomeMessage);
         accounts.add(newAccount);
         noOfCustomers ++;
     }
@@ -22,7 +28,7 @@ public class Bank {
         Account account = findAccount(accountNumber);
         if (account != null) {
             account.withdraw(amount, pin);
-            print("Amount succcesfully withdrawn");
+            print("#"+amount + "Was succesfully withdrawn");
         }
         else{
             print("Account not found. Unable to withdraw");
@@ -33,9 +39,12 @@ public class Bank {
         System.out.println(input);
     }
 
+
     public Account findAccount(int accountNumber) {
         for (Account account : accounts) {
-            if (account.getAccountNumber() == accountNumber) return account;
+            if (account.getAccountNumber() == (accountNumber)) {
+                return account;
+            }
         }
         return null;
     }
@@ -50,7 +59,7 @@ public class Bank {
         if(Ownaccount != null && destinationAccount != null) {
             Ownaccount.withdraw(amount, pin);
             depositTo(destinationAcc, amount);
-            print("Amount successfully transfered");
+            print("#"+amount + "has been transferred");
         }
         else { print("Could not find account to transfer");}
     }
@@ -64,10 +73,10 @@ public class Bank {
         if (account != null) {
             int balance;
             balance = account.checkBalance(pin);
+            print("Your balance is "+ balance);
             return balance;
         }
         else {
-            print("Account not found");
             return -1;
         }
     }
@@ -76,9 +85,10 @@ public class Bank {
         Account account = findAccount(accountNumber);
         if (account != null){
             account.deposit(amount);
-            print("Amount succesfully deposited");
+            print("#"+amount + " Succesfully deposited");
         }
-        else { print("Account not found. Can not deposit");}
+        else {print("Account not found");}
+
     }
 
 

@@ -7,7 +7,7 @@ public class Account {
     private String accountName;
 
 public Account(String pin, int accountNumber, String accountName) {
-    this.balance = balance;
+    this.balance = 0;
     this.pin = pin;
     this.accountNumber = accountNumber;
     this.accountName = accountName;

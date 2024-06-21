@@ -11,6 +11,8 @@ class BankTest {
         Bank kuda = new Bank();
         kuda.addCustomer("1","yemi");
         assertEquals(1, kuda.noOfCustomers());
+        kuda.addCustomer("1","wade");
+        assertEquals(2, kuda.noOfCustomers());
     }
 
     @Test

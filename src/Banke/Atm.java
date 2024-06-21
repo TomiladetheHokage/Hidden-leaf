@@ -1,9 +1,13 @@
 package Banke;
 
 import java.util.Scanner;
-public class Atm{
 
-    private Bank kuda;
+
+public class Atm{
+    private static Bank kuda = new Bank();
+    public static void main(String[] args){
+        goToMainMenu();
+    }
 
     public static String input(String prompt){
         Scanner scanner = new Scanner(System.in);
@@ -20,16 +24,13 @@ public class Atm{
     }
 
     public static void createAccount(){
-        Bank kuda = new Bank();
         String name = input("What is your name? ");
         String pin = input("What is your pin? ");
         kuda.addCustomer(pin,name);
-        print("Account succesfully created");
         goToMainMenu();
     }
 
     public static void deposit(){
-        Bank kuda = new Bank();
         int accountNumber = Integer.parseInt(input("what is your account number? "));
         int amount = Integer.parseInt(input("How much do you want to deposit? "));
         kuda.depositTo(accountNumber, amount);
@@ -37,7 +38,6 @@ public class Atm{
     }
 
     public static void withdraw(){
-        Bank kuda = new Bank();
         int accountNumber = Integer.parseInt(input("what is your account number? "));
         int amount = Integer.parseInt(input("How much do you wannt to withdra? "));
         String pin = input("enter your pin");
@@ -46,7 +46,6 @@ public class Atm{
     }
 
     public static void checkBalance(){
-        Bank kuda = new Bank();
         int accountNumber = Integer.parseInt(input("What is your account number? "));
         String pin = input("What is your pin? ");
         kuda.checkBalanceFor(accountNumber, pin);
@@ -54,11 +53,10 @@ public class Atm{
     }
 
     public static void transfer(){
-        Bank kuda = new Bank();
         int destinationAccount = Integer.parseInt(input("Enter the account number you want to send to: "));
         int ownerAccountNumber = Integer.parseInt(input("Enter your account number: "));
         int amount = Integer.parseInt(input("How much are you sending? "));
-        String pin = input("Enter your pin");
+        String pin = input("Enter your pin: ");
         kuda.transfer(destinationAccount,ownerAccountNumber,amount,pin);
         goToMainMenu();
     }
@@ -75,7 +73,6 @@ public class Atm{
                 """;
         print(menu);
         int userChoice = Integer.parseInt(input("please select: "));
-        //while (userChoice != 7) {
             switch (userChoice) {
                 case 1:
                     createAccount();
@@ -104,11 +101,6 @@ public class Atm{
         goToMainMenu();
     }
 
-    public static void main(String[] args){
-        //Atm machine = new Atm();
-        //Bank kuda = new Bank();
 
-        goToMainMenu();
-    }
 }
 
