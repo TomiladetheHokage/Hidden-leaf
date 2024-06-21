@@ -69,7 +69,7 @@ public class Atm{
                 4. Check Balance
                 5. Go to main menu
                 6. Transfer
-                7. Exit 
+                7. Exit
                 """;
         print(menu);
         int userChoice = Integer.parseInt(input("please select: "));
@@ -98,7 +98,6 @@ public class Atm{
                 default:
                     print("invalid choice please select again");
         }
-        goToMainMenu();
     }
 
 
