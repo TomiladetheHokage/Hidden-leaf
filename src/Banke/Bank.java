@@ -16,8 +16,8 @@ public class Bank {
         String aza = String.valueOf(generateAccountNumber());
         String welcomeMessage = """
                  Account succesfully created
-                 Thank you  accountName for banking with us %s
-                 Your account number is %d
+                 Thank you  %s, for banking with us
+                 Your account number is %s
                 """.formatted(accountName, aza);
         print(welcomeMessage);
         accounts.add(newAccount);
