@@ -28,10 +28,11 @@ public class Bank {
         Account account = findAccount(accountNumber);
         if (account != null) {
             account.withdraw(amount, pin);
-            print("#"+amount + "Was succesfully withdrawn");
+            print("#"+amount + " Was succesfully withdrawn");
         }
         else{
-            print("Account not found. Unable to withdraw");
+            throw new IllegalArgumentException("Account not found. Unable to withdraw");
+            //print("Account not found. Unable to withdraw");
         }
     }
 
@@ -46,6 +47,7 @@ public class Bank {
                 return account;
             }
         }
+        //throw new IllegalArgumentException("Account not found. Unable to find account");
         return null;
     }
 
@@ -61,7 +63,9 @@ public class Bank {
             depositTo(destinationAcc, amount);
             print("#"+amount + "has been transferred");
         }
-        else { print("Could not find account to transfer");}
+        else {
+            throw new IllegalArgumentException("Could not find account to transfer");}
+            //print("Could not find account to transfer");}
     }
 
     private int generateAccountNumber(){
@@ -76,9 +80,7 @@ public class Bank {
             print("Your balance is "+ balance);
             return balance;
         }
-        else {
-            return -1;
-        }
+        throw new IllegalArgumentException("Account not found. Unable to check balance");
     }
 
     public void depositTo (int accountNumber, int amount){
@@ -87,8 +89,7 @@ public class Bank {
             account.deposit(amount);
             print("#"+amount + " Succesfully deposited");
         }
-        else {print("Account not found");}
-
+        throw new IllegalArgumentException("Account not found. Unable to deposit");
     }
 
 

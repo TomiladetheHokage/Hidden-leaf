@@ -22,30 +22,28 @@ public Account(String pin, int accountNumber, String accountName) {
     }
 
     public void deposit(int amount){
-        if (amount > 0){
-            balance = balance + amount;
+        if (amount < 0){
+            throw new IllegalArgumentException("Amount must be a positive number");
         }
+        balance += amount;
     }
 
-    public int checkBalance(String pin){
-    if (this.pin.equalsIgnoreCase(pin)){
+    public int checkBalance(String pin) {
+        if (!this.pin.equalsIgnoreCase(pin)) {
+            throw new IllegalArgumentException("Wrong pin");
+        }
         return balance;
     }
-   else{
-       Bank bank = new Bank();
-       bank.print("Wrong Pin");
-       return -1;
-   }
-    }
-
 
     public void withdraw(int amount, String pin) {
-    if(this.pin.equalsIgnoreCase(pin)){
-        if (balance > amount && amount > 0){
-            balance = balance - amount;
-        }
+    if(!this.pin.equals(pin)) {
+        throw new IllegalArgumentException("Wrong pin");
     }
-
-     
+        if (balance > amount && amount > 0){
+            balance -= amount;
+        }
+      else {
+          throw new IllegalArgumentException("Insufficient balance");
+        }
     }
 }

@@ -18,8 +18,8 @@ class BankTest {
     @Test
     public void testBankCanNotWithdrawFromNonExistingAccount(){
         Bank kuda = new Bank();
-        kuda.withdrawal(500,"1",1);
-        assertEquals(-1, kuda.checkBalanceFor(1, "1"));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->kuda.withdrawal(500,"1",12));
+        assertEquals("Account not found. Unable to withdraw", exception.getMessage());
     }
 
     @Test
@@ -61,8 +61,8 @@ class BankTest {
     @Test
     public void testBankCanNotTransferToNonExistingAza(){
         Bank kuda = new Bank();
-        kuda.transfer(1,1,2_000,"123");
-        assertEquals(-1, kuda.checkBalanceFor(1, "123"));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->kuda.transfer(1, 2,2_000,"123"));
+        assertEquals("Could not find account to transfer", exception.getMessage());
     }
 
     @Test
@@ -81,6 +81,31 @@ class BankTest {
         assertEquals(-1, kuda.checkBalanceFor(2,"123"));
     }
 
+    @Test
+    public void testBankCanNotWithdrawMoreThanAccountBalance(){
+        Bank kuda = new Bank();
+        kuda.addCustomer("123","Tomi");
+        kuda.depositTo(1,1_000);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->kuda.withdrawal(2_000, "123",1));
+        assertEquals("Insufficient balance", exception.getMessage());
+    }
+
+    @Test
+    public void testBankCanNotCheckBalanceOfNonExistingAccount(){
+        Bank kuda = new Bank();
+        kuda.addCustomer("123","Tomi");
+        kuda.depositTo(2,1_000);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->kuda.checkBalanceFor(2, "123"));
+        assertEquals("Account not found. Unable to check balance", exception.getMessage());
+    }
+
+    @Test
+    public void testBankCanCheckBalance(){
+        Bank kuda = new Bank();
+        kuda.addCustomer("123","Tomi");
+        kuda.depositTo(1,1_000);
+        assertEquals(1_000, kuda.checkBalanceFor(1, "123"));
+    }
 
 
 

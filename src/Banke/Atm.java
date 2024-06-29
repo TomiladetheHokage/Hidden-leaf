@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Atm{
     private static Bank kuda = new Bank();
     public static void main(String[] args){
+
         goToMainMenu();
     }
 

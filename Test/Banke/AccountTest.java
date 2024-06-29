@@ -23,14 +23,15 @@ public class AccountTest {
     @Test
     public void testAccountCanNotCheckBalanceWithWrongPin(){
         Account account = new Account("123",1, "yemi");
-        assertEquals(-1,account.checkBalance("111"));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,() -> account.checkBalance("111"));
+        assertEquals("Wrong pin", exception.getMessage());
     }
 
     @Test
     public void testAccountCanNotDepositNegativeBalance(){
         Account account = new Account("123",1, "yemi");
-        account.deposit(-1_000);
-        assertEquals(0, account.checkBalance("123"));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,() -> account.deposit(-1_000));
+        assertEquals("Amount must be a positive number", exception.getMessage());
     }
 
     @Test
@@ -51,9 +52,8 @@ public class AccountTest {
     @Test
     public void testAccountCanNotWithdraw0_00Balance(){
         Account account = new Account("123",1, "yemi");
-        //account.deposit(1_000);
-        account.withdraw(500, "123");
-        assertEquals(0, account.checkBalance("123"));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,() -> account.withdraw(500, "123"));
+        assertEquals( "Insufficient balance", exception.getMessage());
     }
 
 };
