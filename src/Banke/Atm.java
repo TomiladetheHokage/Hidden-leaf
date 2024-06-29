@@ -1,23 +1,25 @@
 package Banke;
 
 import java.util.Scanner;
-
+import javax.swing.JOptionPane;
 
 public class Atm{
     private static Bank kuda = new Bank();
     public static void main(String[] args){
+//JOptionPane.showMessageDialog(null, "Welcome to Banke");
+      goToMainMenu();
 
-        goToMainMenu();
     }
 
     public static String input(String prompt){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(prompt);
-        return scanner.nextLine();
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.print(prompt);
+//        return scanner.nextLine();
+        return JOptionPane.showInputDialog(prompt);
     }
 
     public static void print(String prompt){
-        System.out.println(prompt);
+        JOptionPane.showMessageDialog(null, prompt);
     }
 
     public static void exitApplication(){
@@ -28,21 +30,34 @@ public class Atm{
         String name = input("What is your name? ");
         String pin = input("What is your pin? ");
         kuda.addCustomer(pin,name);
+        JOptionPane.showMessageDialog(null, "Account succesfully created\n" + " Thank you  %s, for banking with us\n" + " Your account number is %s");
         goToMainMenu();
     }
 
     public static void deposit(){
-        int accountNumber = Integer.parseInt(input("what is your account number? "));
-        int amount = Integer.parseInt(input("How much do you want to deposit? "));
-        kuda.depositTo(accountNumber, amount);
+        try {
+            int accountNumber = Integer.parseInt(input("what is your account number? "));
+            int amount = Integer.parseInt(input("How much do you want to deposit? "));
+            kuda.depositTo(accountNumber, amount);
+            print("#"+amount + " Succesfully deposited");
+        }catch(IllegalArgumentException e){
+            print(e.getMessage());
+        }
         goToMainMenu();
     }
 
     public static void withdraw(){
-        int accountNumber = Integer.parseInt(input("what is your account number? "));
-        int amount = Integer.parseInt(input("How much do you wannt to withdra? "));
-        String pin = input("enter your pin");
-        kuda.withdrawal(amount,pin,accountNumber);
+        try {
+            int accountNumber = Integer.parseInt(input("what is your account number? "));
+            int amount = Integer.parseInt(input("How much do you wannt to withdra? "));
+            String pin = input("enter your pin");
+            kuda.withdrawal(amount, pin, accountNumber);
+            print("#" + amount + " Was succesfully withdrawn");
+        } catch (NumberFormatException e){
+            print( e.getMessage());
+        } catch (IllegalArgumentException e) {
+            print( e.getMessage());
+        }
         goToMainMenu();
     }
 
@@ -59,6 +74,7 @@ public class Atm{
         int amount = Integer.parseInt(input("How much are you sending? "));
         String pin = input("Enter your pin: ");
         kuda.transfer(destinationAccount,ownerAccountNumber,amount,pin);
+        print("#"+amount + "has been transferred");
         goToMainMenu();
     }
 
@@ -72,8 +88,8 @@ public class Atm{
                 6. Transfer
                 7. Exit
                 """;
-        print(menu);
-        int userChoice = Integer.parseInt(input("please select: "));
+        //input(menu);
+        int userChoice = Integer.parseInt(input(menu + "please select"));
             switch (userChoice) {
                 case 1:
                     createAccount();
@@ -100,7 +116,9 @@ public class Atm{
                     print("invalid choice please select again");
         }
     }
-
-
 }
+
+
+
+
 

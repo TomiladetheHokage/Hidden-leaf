@@ -77,8 +77,8 @@ class BankTest {
     public void testBankkCanNotDepositToNonExistingAccount(){
         Bank kuda = new Bank();
         kuda.addCustomer("123","Tomi");
-        kuda.depositTo(2, 5_000);
-        assertEquals(-1, kuda.checkBalanceFor(2,"123"));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->kuda.depositTo(2, 5_000));
+        assertEquals("Account not found. Unable to deposit", exception.getMessage());
     }
 
     @Test
@@ -94,7 +94,7 @@ class BankTest {
     public void testBankCanNotCheckBalanceOfNonExistingAccount(){
         Bank kuda = new Bank();
         kuda.addCustomer("123","Tomi");
-        kuda.depositTo(2,1_000);
+        kuda.depositTo(1,1_000);
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->kuda.checkBalanceFor(2, "123"));
         assertEquals("Account not found. Unable to check balance", exception.getMessage());
     }

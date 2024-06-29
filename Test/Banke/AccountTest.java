@@ -39,6 +39,8 @@ public class AccountTest {
         Account account = new Account("123",1, "yemi");
         account.deposit(1_000);
         assertEquals(1_000, account.checkBalance("123"));
+        account.deposit("12");
+        assertEquals(1_000, account.checkBalance("123"));
     }
 
     @Test
