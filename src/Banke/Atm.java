@@ -30,7 +30,7 @@ public class Atm{
         String name = input("What is your name? ");
         String pin = input("What is your pin? ");
         kuda.addCustomer(pin,name);
-        JOptionPane.showMessageDialog(null, "Account succesfully created\n" + " Thank you  %s, for banking with us\n" + " Your account number is %s");
+        JOptionPane.showMessageDialog(null, "Account succesfully created\n Thank you "+ name +", for banking with us\n" + name);
         goToMainMenu();
     }
 
@@ -40,7 +40,10 @@ public class Atm{
             int amount = Integer.parseInt(input("How much do you want to deposit? "));
             kuda.depositTo(accountNumber, amount);
             print("#"+amount + " Succesfully deposited");
-        }catch(IllegalArgumentException e){
+        }catch(NumberFormatException e){
+            print("enter a valid number");
+        }
+        catch(IllegalArgumentException e){
             print(e.getMessage());
         }
         goToMainMenu();
@@ -54,7 +57,7 @@ public class Atm{
             kuda.withdrawal(amount, pin, accountNumber);
             print("#" + amount + " Was succesfully withdrawn");
         } catch (NumberFormatException e){
-            print( e.getMessage());
+            print("Enter a valid number");
         } catch (IllegalArgumentException e) {
             print( e.getMessage());
         }
@@ -69,12 +72,19 @@ public class Atm{
     }
 
     public static void transfer(){
-        int destinationAccount = Integer.parseInt(input("Enter the account number you want to send to: "));
-        int ownerAccountNumber = Integer.parseInt(input("Enter your account number: "));
-        int amount = Integer.parseInt(input("How much are you sending? "));
-        String pin = input("Enter your pin: ");
-        kuda.transfer(destinationAccount,ownerAccountNumber,amount,pin);
-        print("#"+amount + "has been transferred");
+        try {
+            int destinationAccount = Integer.parseInt(input("Enter the account number you want to send to: "));
+            int ownerAccountNumber = Integer.parseInt(input("Enter your account number: "));
+            int amount = Integer.parseInt(input("How much are you sending? "));
+            String pin = input("Enter your pin: ");
+            kuda.transfer(destinationAccount, ownerAccountNumber, amount, pin);
+            print("#" + amount + "has been transferred");
+        } catch (NumberFormatException e){
+            print("Enter a valid number");
+        }
+        catch(IllegalArgumentException e){
+            print(e.getMessage());
+        }
         goToMainMenu();
     }
 
@@ -114,6 +124,7 @@ public class Atm{
                     break;
                 default:
                     print("invalid choice please select again");
+                    goToMainMenu();
         }
     }
 }

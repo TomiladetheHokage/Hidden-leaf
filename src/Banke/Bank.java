@@ -14,6 +14,8 @@ public class Bank {
     public void addCustomer(String pin, String accountName) {
         Account newAccount = new Account(pin, generateAccountNumber(), accountName);
         accounts.add(newAccount);
+        String aza = Integer.toString(generateAccountNumber());
+        print(aza);
         noOfCustomers ++;
     }
 
